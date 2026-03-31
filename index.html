@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from moucchakrecords.in/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 05:14:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moucchak Records</title>
+
+<link href="../cdn.jsdelivr.net/npm/bootstrap%405.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&amp;display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--red:#e10600;
+--white:#ffffff;
+}
+
+body{
+font-family:'Montserrat',sans-serif;
+margin:0;
+background:white;
+overflow-x:hidden;
+cursor:none;
+}
+
+/* ================= CURSOR ================= */
+
+.cursor{
+width:15px;
+height:15px;
+background:var(--red);
+border-radius:50%;
+position:fixed;
+pointer-events:none;
+transform:translate(-50%,-50%);
+z-index:9999;
+}
+
+/* ================= LOADER ================= */
+
+#loader{
+position:fixed;
+width:100%;
+height:100vh;
+background:white;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:99999;
+}
+
+#loader img{
+width:120px;
+animation:spin 2s linear infinite;
+}
+
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
+
+/* ================= MODERN HEADER ================= */
+
+.modern-navbar{
+  backdrop-filter:blur(18px);
+  background:rgba(255,255,255,0.75);
+  padding:22px 0;
+  transition:0.3s ease;
+  border-bottom:1px solid rgba(0,0,0,0.05);
+}
+
+.modern-navbar.scrolled{
+  background:rgba(255,255,255,0.95);
+  box-shadow:0 8px 30px rgba(0,0,0,0.05);
+}
+
+/* LOGO */
+
+.navbar-brand img{
+  height:60px;   /* Bigger logo */
+  margin-right:12px;
+}
+
+.brand-text{
+  font-weight:800;
+  font-size:20px;
+  letter-spacing:2px;
+  color:#e10600;
+}
+
+/* MENU */
+
+.nav-link{
+  font-weight:600;
+  color:#111 !important;
+  margin-left:30px;
+  position:relative;
+  transition:0.3s ease;
+}
+
+.nav-link::after{
+  content:'';
+  position:absolute;
+  width:0%;
+  height:2px;
+  left:0;
+  bottom:-6px;
+  background:#e10600;
+  transition:0.3s ease;
+}
+
+.nav-link:hover{
+  color:#e10600 !important;
+}
+
+.nav-link:hover::after{
+  width:100%;
+}
+
+/* CONTACT BUTTON */
+
+.contact-btn{
+  background:#e10600;
+  color:white !important;
+  padding:8px 20px;
+  border-radius:30px;
+  margin-left:40px;
+}
+
+.contact-btn:hover{
+  background:#111;
+  color:white !important;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:991px){
+  .navbar-brand img{
+    height:50px;
+  }
+}
+/* ================= HERO SLIDER ================= */
+
+.hero-slider{
+position:relative;
+height:100vh;
+overflow:hidden;
+}
+
+.slide{
+position:absolute;
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+opacity:0;
+transform:scale(1.15);
+filter:blur(8px);
+transition:opacity 1s ease, transform 6s ease, filter 1s ease;
+}
+
+.slide.active{
+opacity:1;
+transform:scale(1);
+filter:blur(0);
+z-index:2;
+}
+
+.slide::after{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(225,6,0,0.4));
+}
+
+.slide-content{
+position:absolute;
+bottom:20%;
+left:10%;
+color:white;
+z-index:3;
+}
+
+.slide-content h1{
+font-size:5rem;
+font-weight:900;
+opacity:0;
+transform:translateY(40px);
+transition:1s ease;
+}
+
+.slide-content p{
+opacity:0;
+transform:translateY(40px);
+transition:1.2s ease;
+}
+
+.slide.active h1,
+.slide.active p{
+opacity:1;
+transform:translateY(0);
+}
+
+/* ARROWS */
+
+.slider-controls{
+position:absolute;
+top:50%;
+width:100%;
+display:flex;
+justify-content:space-between;
+padding:0 40px;
+z-index:5;
+}
+
+.slider-controls button{
+background:rgba(255,255,255,0.2);
+border:none;
+color:white;
+font-size:2rem;
+width:50px;
+height:50px;
+border-radius:50%;
+backdrop-filter:blur(10px);
+transition:.3s;
+}
+
+.slider-controls button:hover{
+background:var(--red);
+}
+
+/* COUNTER */
+
+.slide-counter{
+position:absolute;
+bottom:40px;
+right:50px;
+color:white;
+font-size:1.2rem;
+font-weight:600;
+z-index:5;
+}
+
+/* PROGRESS */
+
+.progress-container{
+position:absolute;
+bottom:0;
+width:100%;
+height:4px;
+background:rgba(255,255,255,0.2);
+z-index:5;
+}
+
+.progress-bar{
+height:100%;
+width:0%;
+background:var(--red);
+}
+
+/* GLITCH */
+
+.glitch-overlay{
+position:absolute;
+width:100%;
+height:100%;
+background:var(--red);
+opacity:0;
+mix-blend-mode:screen;
+z-index:4;
+pointer-events:none;
+}
+
+/* ================= PARALLAX ================= */
+
+.parallax{
+height:60vh;
+background:url('hero2.jpg') center/cover fixed;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:3rem;
+font-weight:900;
+text-align:center;
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+padding:100px 0;
+opacity:0;
+transform:translateY(50px);
+transition:.6s ease;
+}
+
+.section-title{
+text-align:center;
+font-weight:900;
+color:var(--red);
+margin-bottom:60px;
+}
+
+/* ================= ARTISTS ================= */
+
+.artist-card{
+position:relative;
+overflow:hidden;
+}
+
+.artist-card img{
+width:100%;
+height:400px;
+object-fit:cover;
+transition:transform .6s ease;
+}
+
+.artist-overlay{
+position:absolute;
+bottom:0;
+width:100%;
+height:100%;
+background:linear-gradient(to top,rgba(225,6,0,0.85),transparent);
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+padding:30px;
+color:white;
+opacity:0;
+transition:.5s;
+}
+
+.artist-card:hover img{
+transform:scale(1.1);
+}
+
+.artist-card:hover .artist-overlay{
+opacity:1;
+}
+
+/* ================= MUSIC PLAYER ================= */
+
+.music-player{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:white;
+border-top:2px solid var(--red);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px 30px;
+z-index:999;
+}
+
+.music-player img{
+width:50px;
+height:50px;
+object-fit:cover;
+margin-right:15px;
+}
+
+.player-left{
+display:flex;
+align-items:center;
+}
+
+.player-controls button{
+background:var(--red);
+border:none;
+color:white;
+width:45px;
+height:45px;
+border-radius:50%;
+font-size:18px;
+}
+
+footer{
+background:var(--red);
+color:white;
+padding:40px;
+text-align:center;
+}
+
+/* ================= PROFESSIONAL FOOTER ================= */
+
+.main-footer{
+background:#111;
+color:white;
+padding:80px 0 0;
+}
+
+.footer-logo{
+height:60px;
+}
+
+.footer-about{
+color:#ccc;
+line-height:1.6;
+}
+
+.footer-title{
+font-weight:700;
+margin-bottom:20px;
+color:white;
+}
+
+.footer-links{
+list-style:none;
+padding:0;
+}
+
+.footer-links li{
+margin-bottom:10px;
+}
+
+.footer-links a{
+color:#ccc;
+text-decoration:none;
+transition:.3s;
+}
+
+.footer-links a:hover{
+color:#e10600;
+}
+
+.newsletter-form{
+display:flex;
+gap:10px;
+}
+
+.newsletter-form input{
+flex:1;
+padding:10px;
+border:none;
+border-radius:3px;
+}
+
+.newsletter-form button{
+background:#e10600;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:3px;
+}
+
+.social-icons a{
+color:white;
+margin-right:15px;
+transition:.3s;
+}
+
+.social-icons a:hover{
+color:#e10600;
+}
+
+.footer-bottom{
+background:#0a0a0a;
+padding:20px 0;
+margin-top:60px;
+font-size:.9rem;
+color:#aaa;
+}
+
+.footer-bottom a{
+color:#aaa;
+text-decoration:none;
+margin-left:10px;
+}
+
+.footer-bottom a:hover{
+color:#e10600;
+}
+
+/* ================= FEATURED VIDEOS ================= */
+
+#videos{
+background:#f8f8f8;
+}
+
+.video-card{
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
+transition:.3s ease;
+}
+
+.video-card:hover{
+transform:translateY(-5px);
+box-shadow:0 15px 40px rgba(0,0,0,0.1);
+}
+
+.video-card iframe{
+width:100%;
+height:315px;
+border-radius:8px;
+border:none;
+}
+
+.video-card h5{
+margin-top:15px;
+font-weight:600;
+color:#e10600;
+}
+/* ================= PARALLAX AUTO SLIDER ================= */
+
+.parallax-slider{
+  position:relative;
+  height:60vh;
+  overflow:hidden;
+}
+
+.parallax-slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transform:scale(1.2);
+  transition:opacity 1s ease, transform 3s ease;
+}
+
+.parallax-slide.active{
+  opacity:1;
+  transform:scale(1);
+}
+
+.parallax-slide::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.4),rgba(225,6,0,0.4));
+}
+
+.parallax-text{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  color:white;
+  font-size:3rem;
+  font-weight:900;
+  letter-spacing:3px;
+}
+/* ================= LISTEN BUTTON ================= */
+
+.listen-btn{
+display:inline-block;
+margin-top:20px;
+padding:12px 30px;
+background:#e10600;
+color:white;
+text-decoration:none;
+font-weight:600;
+letter-spacing:1px;
+border-radius:30px;
+transition:.3s ease;
+}
+
+.listen-btn:hover{
+background:white;
+color:#e10600;
+transform:translateY(-3px);
+box-shadow:0 10px 25px rgba(225,6,0,0.4);
+}
+
+html{scroll-behavior:smooth;}
+
+</style>
+</head>
+<body>
+
+<div class="cursor"></div>
+
+<div id="loader">
+<img src="moucchak_logo.png">
+</div>
+
+<nav class="navbar navbar-expand-lg modern-navbar fixed-top">
+  <div class="container-fluid px-5">
+
+    <!-- LOGO -->
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="moucchak_logo.png" alt="Moucchak Logo">
+      <span class="brand-text">MOUCCHAK</span>
+    </a>
+
+    <!-- MOBILE TOGGLE -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      ☰
+    </button>
+
+    <!-- MENU -->
+    <div class="collapse navbar-collapse justify-content-end" id="menu">
+      <ul class="navbar-nav align-items-center">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#artists">Artists</a></li>
+        <li class="nav-item"><a class="nav-link" href="#videos">Videos</a></li>
+        <li class="nav-item"><a class="nav-link contact-btn" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-slider" id="home">
+
+<div class="slide active" style="background-image:url('hero1.jpg')">
+<div class="slide-content">
+  <h1>Samay</h1>
+  <p>New Music by Arazzy Buzz</p>
+  <a href="#" class="listen-btn">LISTEN NOW</a>
+</div>
+</div>
+
+<div class="slide" style="background-image:url('hero2.jpg')">
+<div class="slide-content">
+  <h1>The Death</h1>
+  <p>New Music by Arazzy Buzz</p>
+  <a href="#" class="listen-btn">LISTEN NOW</a>
+</div>
+</div>
+
+<div class="slide" style="background-image:url('hero3.jpg')">
+<div class="slide-content">
+  <h1>I am the Buzz</h1>
+  <p>New Music by Arazzy Buzz</p>
+  <a href="#" class="listen-btn">LISTEN NOW</a>
+</div>
+</div>
+
+<div class="slider-controls">
+<button class="prev">&#10094;</button>
+<button class="next">&#10095;</button>
+</div>
+
+<div class="progress-container">
+<div class="progress-bar"></div>
+</div>
+
+<div class="glitch-overlay"></div>
+
+</section>
+
+<section id="videos">
+<div class="container">
+<h2 class="section-title">FEATURED VIDEOS</h2>
+
+<div class="row g-4">
+
+<div class="col-lg-6">
+<div class="video-card">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1fan80WU3Ig?si=xojafD4qUMdddt1V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<h5>Artist One – New Era</h5>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="video-card">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HfslylseXRw?si=fkUqP39SQ53s-n3Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<h5>Artist Two – Art Without Limits</h5>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="video-card">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VglG9tnYJZQ?si=3vyC4LOF7DypPp5n" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<h5>Artist Three – I Am The Buzz</h5>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="video-card">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xNw1jJ8xP3s?si=bEK9ydZbjc_WD6-h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<h5>Moucchak Records Showcase</h5>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="artists">
+<div class="container">
+<h2 class="section-title">OUR ARTISTS</h2>
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="artist-card">
+<img src="artist1.png">
+<div class="artist-overlay">
+<h3>Arazzy Buzz</h3>
+<p>Electronic Music Artist</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="artist-card">
+<img src="artist2.png">
+<div class="artist-overlay">
+<h3>Ajantrik</h3>
+<p>Electronic Music Artist</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="artist-card">
+<img src="artist3.png">
+<div class="artist-overlay">
+<h3>Rohini</h3>
+<p>Singer & Songwriter</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- PROFESSIONAL FOOTER -->
+<footer class="main-footer">
+
+<div class="container">
+<div class="row gy-5">
+
+<!-- Column 1 -->
+<div class="col-lg-4 col-md-8">
+<img src="moucchaklogo.png" class="footer-logo mb-3">
+<p class="footer-about">
+Moucchak Records is an independent music label shaping the sound of the new generation.
+Bold artists. Fearless sound. Global vision.
+</p>
+</div>
+
+<!-- Column 2 -->
+<div class="col-lg-2 col-md-6">
+<h5 class="footer-title">Quick Links</h5>
+<ul class="footer-links">
+<li><a href="#home">Home</a></li>
+<li><a href="#artists">Artists</a></li>
+<li><a href="#contact">Contact</a></li>
+<li><a href="#">Releases</a></li>
+</ul>
+</div>
+
+<!-- Column 3 -->
+<div class="col-lg-3 col-md-6">
+<h5 class="footer-title">Artists</h5>
+<ul class="footer-links">
+<li><a href="#">Artist One</a></li>
+<li><a href="#">Artist Two</a></li>
+<li><a href="#">Artist Three</a></li>
+</ul>
+</div>
+
+<!-- Column 4 -->
+<div class="col-lg-3 col-md-6">
+<h5 class="footer-title">Join Our Newsletter</h5>
+<form class="newsletter-form">
+<input type="email" placeholder="Your email address">
+<button type="submit">Subscribe</button>
+</form>
+
+<div class="social-icons mt-4">
+<a href="#">
+<svg viewBox="0 0 24 24" width="20">
+<path fill="currentColor" d="M22 12a10 10 0 10-11.5 9.9v-7h-2.2V12h2.2V9.8c0-2.2 1.3-3.4 3.3-3.4.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.2l-.4 2.9h-1.8v7A10 10 0 0022 12z"/>
+</svg>
+</a>
+
+<a href="#">
+<svg viewBox="0 0 24 24" width="20">
+<path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 3.2.1 4.7 1.6 4.8 4.8.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 3.2-1.6 4.7-4.8 4.8-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-3.2-.1-4.7-1.6-4.8-4.8C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9C2.4 3.9 3.9 2.4 7.1 2.3c1.3-.1 1.7-.1 4.9-.1z"/>
+</svg>
+</a>
+
+<a href="#">
+<svg viewBox="0 0 24 24" width="20">
+<path fill="currentColor" d="M22.5 6c-.8.4-1.6.6-2.4.7.9-.5 1.5-1.3 1.8-2.2-.8.5-1.7.8-2.6 1C18.5 4.6 17.5 4 16.3 4c-2.2 0-3.8 2-3.3 4.1-3-.1-5.7-1.6-7.5-3.8-1 1.8-.5 4 1.3 5.1-.7 0-1.3-.2-1.9-.5 0 1.9 1.3 3.5 3.1 3.9-.6.2-1.3.2-1.9.1.5 1.6 2 2.7 3.7 2.7A7.7 7.7 0 012 19.5c1.7 1.1 3.7 1.7 5.9 1.7 7.1 0 11-5.9 11-11v-.5c.8-.6 1.5-1.3 2.1-2.1z"/>
+</svg>
+</a>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="footer-bottom">
+<div class="container d-flex justify-content-between flex-wrap">
+<p>© 2026 Moucchak Records Pvt. Ltd. All Rights Reserved.</p>
+<div>
+<a href="#">Privacy Policy</a> |
+<a href="#">Terms of Use</a>
+</div>
+</div>
+</div>
+
+</footer>
+
+<script src="../cdn.jsdelivr.net/npm/bootstrap%405.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+/* Loader */
+window.addEventListener("load",()=>{loader.style.display="none";});
+
+/* Navbar scroll */
+window.addEventListener("scroll",()=>{
+document.querySelector(".navbar").classList.toggle("scrolled",window.scrollY>50);
+});
+
+/* Cursor */
+document.addEventListener("mousemove",e=>{
+document.querySelector(".cursor").style.left=e.clientX+"px";
+document.querySelector(".cursor").style.top=e.clientY+"px";
+});
+
+/* Section animation */
+const sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+sections.forEach(sec=>{
+if(sec.getBoundingClientRect().top<window.innerHeight-100){
+sec.style.opacity="1";
+sec.style.transform="translateY(0)";
+}
+});
+});
+
+/* Slider */
+const slides=document.querySelectorAll(".slide");
+const nextBtn=document.querySelector(".next");
+const prevBtn=document.querySelector(".prev");
+const progressBar=document.querySelector(".progress-bar");
+const glitch=document.querySelector(".glitch-overlay");
+
+let current=0;
+let interval;
+let duration=6000;
+
+function updateCounter(){
+counter.textContent=String(current+1).padStart(2,'0');
+}
+
+function startProgress(){
+progressBar.style.transition="none";
+progressBar.style.width="0%";
+setTimeout(()=>{
+progressBar.style.transition=`width ${duration}ms linear`;
+progressBar.style.width="100%";
+},50);
+}
+
+function glitchEffect(){
+glitch.style.opacity="0.7";
+setTimeout(()=>{glitch.style.opacity="0";},150);
+}
+
+function showSlide(index){
+slides[current].classList.remove("active");
+current=index;
+slides[current].classList.add("active");
+
+glitchEffect();
+startProgress();
+}
+
+function nextSlide(){
+showSlide((current+1)%slides.length);
+}
+
+function prevSlide(){
+showSlide((current-1+slides.length)%slides.length);
+}
+
+nextBtn.onclick=()=>{nextSlide();reset();};
+prevBtn.onclick=()=>{prevSlide();reset();};
+
+function auto(){
+interval=setInterval(nextSlide,duration);
+startProgress();
+}
+
+function reset(){
+clearInterval(interval);
+auto();
+}
+
+updateCounter();
+auto();
+
+/* Audio */
+function toggleAudio(){
+var audio=document.getElementById("audio");
+audio.paused?audio.play():audio.pause();
+}
+/* PARALLAX AUTO SLIDER */
+
+const parallaxSlides = document.querySelectorAll(".parallax-slide");
+let pIndex = 0;
+
+function nextParallax(){
+  parallaxSlides[pIndex].classList.remove("active");
+  pIndex = (pIndex + 1) % parallaxSlides.length;
+  parallaxSlides[pIndex].classList.add("active");
+}
+
+setInterval(nextParallax, 3000);
+
+window.addEventListener("scroll",function(){
+  document.querySelector(".modern-navbar")
+  .classList.toggle("scrolled",window.scrollY>50);
+});
+
+</script>
+
+</body>
+
+<!-- Mirrored from moucchakrecords.in/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 05:14:31 GMT -->
+</html>
